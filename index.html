@@ -29,6 +29,9 @@
       <!-- Button triggers new movie to be added -->
       <input id="add-movie" type="submit" value="Add a Movie, Yo!">
     </form>
+
+    <div id="movies=view"></div>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript">
       
@@ -54,7 +57,11 @@
         $.ajax({
          url: queryURL + '&t=' + title
         }).then(function(movieData) {
-          console.log(movieData)
+          var rating = $('<p>').text(movieData.Rated)
+          var released = $('<p>').text(movieData.Released)
+          var plot = $('<p>').text(movieData.Plot)
+          var img = $('<img>').attr('src', movieData.Poster)
+          $('#movies-view').prepend(rating, released, plot, img)
         })
       })
 
